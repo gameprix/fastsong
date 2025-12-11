@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>FASTSONG PRO - Music Editor & Audio Studio Online</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://fastsong.eu.org/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fastsong.eu.org/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://fastsong.eu.org/apple-touch-icon.png">
+
+<!-- OG -->
+<meta property="og:title" content="FASTSONG PRO - Music Editor & Audio Studio Online">
+<meta property="og:description" content="Editor musik lengkap online: multi-track, vocal remover, mastering AI, pitch shift, denoise, dan export MP3/WAV.">
+<meta property="og:image" content="https://fastsong.eu.org/logo.png">
+<meta property="og:type" content="website">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FASTSONG PRO">
+<meta name="twitter:description" content="Studio musik online berbasis AI.">
+<meta name="twitter:image" content="https://fastsong.eu.org/logo.png">
+
+<!-- Responsive -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- BRAND -->
+<meta name="author" content="Fastsong">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="ui.css">
+
+<!-- Ads -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4633437485737999"
+crossorigin="anonymous"></script>
+
+<!-- AMP Auto Ads -->
+<script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.hero {
+    background: #111;
+    color: #fff;
+    padding: 80px 20px;
+    text-align: center;
+}
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+.hero p {
+    font-size: 20px;
+    opacity: .9;
+}
+.btn-primary {
+    background: #fff;
+    color: #111;
+    padding: 15px 35px;
+    border-radius: 6px;
+    font-size: 18px;
+    margin-top: 20px;
+    display: inline-block;
+    text-decoration: none;
+}
+.section {
+    padding: 50px 20px;
+    max-width: 900px;
+    margin: auto;
+}
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+.feature-box {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+footer {
+    background: #111;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin-top:40px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header style="padding:20px;background:#111;color:#fff;">
+    <h1>FASTSONG</h1>
+    <nav style="margin-top:10px;">
+        <a href="/about" style="color:#fff;margin-right:15px;">About</a>
+        <a href="/team" style="color:#fff;margin-right:15px;">Team</a>
+        <a href="/artikel" style="color:#fff;margin-right:15px;">Artikel</a>
+        <a href="/features" style="color:#fff;margin-right:15px;">Features</a>
+        <a href="/download" style="color:#fff;">Download</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Studio Musik Online yang Powerful</h1>
+    <p>Edit musik, bersihkan noise, hapus vokal, dan mastering — semuanya dari browser.</p>
+    <a href="/editor" class="btn-primary">Mulai Edit Musik</a>
+</div>
+
+<!-- FITUR -->
+<section class="section">
+    <h2 style="text-align:center;">Fitur Utama FASTSONG</h2>
+    <div class="feature-grid" style="margin-top:30px;">
+        <div class="feature-box">
+            <h3>🎚️ Multi-track Editor</h3>
+            <p>Edit banyak layer audio sekaligus dalam satu proyek.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>🎤 Vocal Remover</h3>
+            <p>Pisahkan musik dan vokal menggunakan AI.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>🤖 AI Noise Reduction</h3>
+            <p>Hilangkan suara bising secara otomatis.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>🎵 Auto Mastering</h3>
+            <p>Kualitas audio profesional dalam 1 klik.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>📈 Pitch & Tempo Edit</h3>
+            <p>Ubah nada dan kecepatan tanpa merusak audio.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>📤 Export MP3 / WAV</h3>
+            <p>Simpan hasil editing dalam format berkualitas tinggi.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PWA INSTALL INFO -->
+<section class="section">
+    <h2 style="text-align:center;">FASTSONG adalah PWA</h2>
+    <p style="text-align:center;">
+        Anda bisa menginstalnya sebagai aplikasi dan digunakan offline.
+    </p>
+    <p style="text-align:center;">
+        <a href="/download" class="btn-primary">Cara Install FASTSONG</a>
+    </p>
+</section>
+
+<footer>
+    © 2025 FASTSONG — Music Editor & Audio Studio Online
+</footer>
+
+<!-- SERVICE WORKER REGISTRATION -->
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+        navigator.serviceWorker.register("/sw.js").then(function(reg) {
+            console.log("Service Worker terdaftar:", reg.scope);
+        }).catch(function(err) {
+            console.log("Service Worker gagal:", err);
+        });
+    });
+}
+</script>
+
+</body>
+</html>
