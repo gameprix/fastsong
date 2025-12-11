@@ -1,0 +1,15 @@
+async function loadRNNoise() {
+  if (!window.RNNoise) {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/gh/jitsi/rnnoise-wasm/dist/rnnoise.js';
+    document.body.appendChild(script);
+    await new Promise(resolve => script.onload = resolve);
+    console.log('RNNoise loaded!');
+  }
+}
+
+async function denoiseAudio(audioBuffer) {
+  await loadRNNoise();
+  const outputBuffer = RNNoise.process(audioBuffer);
+  return outputBuffer;
+}
