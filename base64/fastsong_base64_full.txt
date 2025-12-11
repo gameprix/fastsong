@@ -1,0 +1,4 @@
+cat base64/fastsong_base64_part*.txt > fastsong_base64_full.txt
+Get-Content base64\fastsong_base64_part*.txt | Set-Content fastsong_base64_full.txt
+base64 -d fastsong_base64_full.txt > download/fastsong.apk
+certutil -decode fastsong_base64_full.txt download\fastsong.apk
