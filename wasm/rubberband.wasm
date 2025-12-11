@@ -1,0 +1,15 @@
+async function loadRubberband() {
+  if (!window.Rubberband) {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/gh/Daninet/rubberband-wasm/rubberband.js';
+    document.body.appendChild(script);
+    await new Promise(resolve => script.onload = resolve);
+    console.log('Rubberband loaded!');
+  }
+}
+
+async function pitchShiftAudio(audioBuffer, semitones) {
+  await loadRubberband();
+  const output = Rubberband.shiftPitch(audioBuffer, semitones);
+  return output;
+}
