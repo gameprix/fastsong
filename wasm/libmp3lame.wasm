@@ -1,0 +1,17 @@
+async function loadLAME() {
+  if (!window.Lame) {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/gh/zhuker/lamejs/lame.min.js';
+    document.body.appendChild(script);
+    await new Promise(resolve => script.onload = resolve);
+    console.log('LAME encoder loaded!');
+  }
+}
+
+async function exportMP3(audioBuffer) {
+  await loadLAME();
+  const mp3Encoder = new Lame.Mp3Encoder(2, 44100, 128);
+  const mp3Data = mp3Encoder.encodeBuffer(audioBuffer);
+  const blob = new Blob([mp3Data], { type: 'audio/mp3' });
+  return URL.createObjectURL(blob);
+}
