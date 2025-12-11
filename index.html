@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+<meta charset="UTF-8">
+<title>Fastsong – Music Editor PRO</title>
+
+<!-- BRAND -->
+<meta name="author" content="Fastsong">
+
+<!-- GOOGLE ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4633437485737999"
+crossorigin="anonymous"></script>
+<meta name="google-adsense-account" content="ca-pub-4633437485737999">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+
+<style>
+
+/* GLOBAL */
+body {
+    font-family: Arial;
+    background: #111;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+body.light {
+    background: #f3f3f3;
+    color: #111;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+audio {
+    width: 100%;
+    margin-top: 10px;
+}
+
+input[type=range] {
+    width: 100%;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-top: 10px;
+}
+
+canvas {
+    width: 100%;
+    height: 200px;
+    background: black;
+    border: 1px solid #333;
+    margin-top: 20px;
+}
+
+/* BUTTON */
+.btn {
+    padding: 10px 20px;
+    background: #444;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    margin: 5px;
+}
+.btn:hover {
+    background: #666;
+}
+
+body.light .btn {
+    background: #ccc;
+    color: #111;
+}
+
+#piano {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.key {
+    width: 40px;
+    height: 150px;
+    background: white;
+    color: black;
+    border: 1px solid #000;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.light .key {
+    background: #ddd;
+}
+
+#eq10 {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    text-align: center;
+    gap: 5px;
+}
+
+#eq10 div {
+    display: flex;
+    flex-direction: column;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎵 FASTSONG – Music Editor PRO</h1>
+    <p>All-in-one editor dengan efek profesional.</p>
+
+    <!-- FILE -->
+    <input type="file" id="audioFile" accept="audio/*">
+    <audio id="player" controls></audio>
+
+    <!-- CONTROLS -->
+    <h2>Controls</h2>
+    Volume: <span id="volVal">1</span>
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+
+    Speed: <span id="speedVal">1x</span>
+    <input type="range" id="speed" min="0.5" max="2" step="0.1" value="1">
+
+    <canvas id="visualizer"></canvas>
+
+    <!-- EQ BASS/TREBLE -->
+    <h2>Equalizer</h2>
+    <label>Bass</label>
+    <input type="range" id="bass" min="-40" max="40" value="0">
+
+    <label>Treble</label>
+    <input type="range" id="treble" min="-40" max="40" value="0">
+
+    <!-- 10-BAND EQ -->
+    <h2>Graphic EQ (10-Band)</h2>
+    <div id="eq10"></div>
+
+    <!-- EFFECTS -->
+    <h2>Effects</h2>
+    <label>Reverb</label>
+    <input type="range" id="reverb" min="0" max="1" step="0.01" value="0.4">
+
+    <label>Echo</label>
+    <input type="range" id="echo" min="0" max="1" step="0.01" value="0.3">
+
+    <label>Delay Time (ms)</label>
+    <input type="range" id="delay" min="0" max="1000" step="10" value="200">
+
+    <!-- AUTOTUNE -->
+    <h2>AutoTune</h2>
+    <label>Strength</label>
+    <input type="range" id="autotune" min="0" max="1" step="0.01" value="0.5">
+
+    <!-- CUTTER -->
+    <h2>Audio Cutter</h2>
+    Start: <input type="number" id="cutStart" value="0">
+    End: <input type="number" id="cutEnd" value="5">
+    <button class="btn" id="cutBtn">Potong & Download</button>
+
+    <!-- PIANO -->
+    <h2>Piano Virtual</h2>
+    <div id="piano"></div>
+
+    <!-- RECORDER -->
+    <h2>Recorder</h2>
+    <button class="btn" id="recStart">Start</button>
+    <button class="btn" id="recStop">Stop</button>
+    <a id="recDownload" class="btn" style="display:none">Download Rekaman</a>
+
+    <!-- SAVE PROJECT -->
+    <h2>Project</h2>
+    <button class="btn" id="saveProject">Save Project</button>
+    <button class="btn" id="loadProject">Load Project</button>
+
+    <!-- SHARE -->
+    <h2>Share Audio</h2>
+    <button class="btn" id="shareBtn">Share</button>
+
+    <!-- THEME -->
+    <h2>Appearance</h2>
+    <button class="btn" id="themeToggle">Dark / Light</button>
+
+</div>
+
+<script>
+
+/* ================================================================
+    AUDIO CONTEXT SETUP
+================================================================ */
+const player = document.getElementById("player");
+const audioFile = document.getElementById("audioFile");
+const audioCtx = new AudioContext();
+const source = audioCtx.createMediaElementSource(player);
+
+/* ANALYSER */
+const analyser = audioCtx.createAnalyser();
+analyser.fftSize = 256;
+const bufferLength = analyser.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+
+/* VISUALIZER */
+const canvas = document.getElementById("visualizer");
+const ctx = canvas.getContext("2d");
+
+function draw() {
+    requestAnimationFrame(draw);
+    analyser.getByteFrequencyData(dataArray);
+
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    let barWidth = canvas.width / bufferLength;
+    let x = 0;
+    for (let i = 0; i < bufferLength; i++) {
+        let h = dataArray[i];
+        ctx.fillStyle = `rgb(${h+50},50,50)`;
+        ctx.fillRect(x, canvas.height - h, barWidth, h);
+        x += barWidth;
+    }
+}
+draw();
+
+/* ================================================================
+    EFFECTS: BASS, TREBLE, REVERB, ECHO, DELAY, AUTOTUNE
+================================================================ */
+const bass = audioCtx.createBiquadFilter();
+bass.type = "lowshelf";
+bass.frequency.value = 200;
+
+const treble = audioCtx.createBiquadFilter();
+treble.type = "highshelf";
+treble.frequency.value = 2000;
+
+/* REVERB */
+const convolver = audioCtx.createConvolver();
+fetch("https://cdn.jsdelivr.net/gh/mdn/web-audio-api/examples/audio-buffer/concert-hall.wav")
+  .then(r => r.arrayBuffer())
+  .then(b => audioCtx.decodeAudioData(b))
+  .then(buf => convolver.buffer = buf);
+
+/* ECHO + DELAY */
+const delayNode = audioCtx.createDelay(5);
+const feedback = audioCtx.createGain();
+const echoGain = audioCtx.createGain();
+delayNode.connect(feedback);
+feedback.connect(delayNode);
+delayNode.connect(echoGain);
+
+/* AUTOTUNE SIMPLE */
+const pitchShifter = audioCtx.createWaveShaper();
+const autotuneGain = audioCtx.createGain();
+
+/* FINAL CHAIN ORDER */
+source.connect(bass);
+bass.connect(treble);
+treble.connect(pitchShifter);
+pitchShifter.connect(autotuneGain);
+autotuneGain.connect(convolver);
+convolver.connect(delayNode);
+echoGain.connect(audioCtx.destination);
+delayNode.connect(audioCtx.destination);
+
+treble.connect(analyser);
+analyser.connect(audioCtx.destination);
+
+/* ================================================================
+    GENERATE 10-BAND EQ
+================================================================ */
+const eqFrequencies = [31,62,125,250,500,1000,2000,4000,8000,16000];
+const eqContainer = document.getElementById("eq10");
+let eqBands = [];
+
+eqFrequencies.forEach(freq => {
+    let f = audioCtx.createBiquadFilter();
+    f.type = "peaking";
+    f.frequency.value = freq;
+    f.gain.value = 0;
+    eqBands.push(f);
+
+    let wrapper = document.createElement("div");
+    wrapper.innerHTML = `<small>${freq} Hz</small>`;
+    
+    let slider = document.createElement("input");
+    slider.type = "range";
+    slider.min = -20;
+    slider.max = 20;
+    slider.value = 0;
+
+    slider.oninput = ()=> f.gain.value = slider.value;
+    wrapper.appendChild(slider);
+    eqContainer.appendChild(wrapper);
+});
+
+/* RECONNECT EQ CHAIN */
+source.disconnect();
+let chain = source;
+eqBands.forEach(b => {
+    chain.connect(b);
+    chain = b;
+});
+chain.connect(bass);
+
+/* ================================================================
+    CONTROLS
+================================================================ */
+document.getElementById("volume").oninput = e=>{
+    player.volume = e.target.value;
+    document.getElementById("volVal").textContent = e.target.value;
+};
+
+document.getElementById("speed").oninput = e=>{
+    player.playbackRate = e.target.value;
+    document.getElementById("speedVal").textContent = e.target.value + "x";
+};
+
+document.getElementById("bass").oninput = e => bass.gain.value = e.target.value;
+document.getElementById("treble").oninput = e => treble.gain.value = e.target.value;
+
+document.getElementById("reverb").oninput = e => convolver.normalize = e.target.value;
+document.getElementById("echo").oninput = e => echoGain.gain.value = e.target.value;
+document.getElementById("delay").oninput = e => delayNode.delayTime.value = e.target.value / 1000;
+
+document.getElementById("autotune").oninput = e => {
+    autotuneGain.gain.value = e.target.value;
+    pitchShifter.curve = new Float32Array([1,1+e.target.value*0.3]);
+};
+
+/* ================================================================
+    LOAD AUDIO FILE
+================================================================ */
+audioFile.onchange = ()=>{
+    const file = audioFile.files[0];
+    if (file){
+        player.src = URL.createObjectURL(file);
+        player.play();
+    }
+};
+
+/* ================================================================
+    AUDIO CUTTER (Export WAV)
+================================================================ */
+function audioBufferToWav(buffer){
+    let numOfChan = buffer.numberOfChannels,
+        length = buffer.length * numOfChan * 2 + 44,
+        buffer2 = new ArrayBuffer(length),
+        view = new DataView(buffer2),
+        channels = [], i, sample,
+        offset = 0, pos = 0;
+
+    function setUint16(data){ view.setUint16(pos, data, true); pos+=2; }
+    function setUint32(data){ view.setUint32(pos, data, true); pos+=4; }
+
+    setUint32(0x46464952);
+    setUint32(length-8);
+    setUint32(0x45564157);
+    setUint32(0x20746d66);
+    setUint32(16);
+    setUint16(1);
+    setUint16(numOfChan);
+    setUint32(buffer.sampleRate);
+    setUint32(buffer.sampleRate * 2 * numOfChan);
+    setUint16(numOfChan*2);
+    setUint16(16);
+    setUint32(0x61746164);
+    setUint32(length-pos-4);
+
+    for(i=0;i<numOfChan;i++)
+        channels.push(buffer.getChannelData(i));
+
+    while(pos < length){
+        for(i=0;i<numOfChan;i++){
+            sample = Math.max(-1, Math.min(1, channels[i][offset]));
+            view.setInt16(pos, sample<0? sample*0x8000 : sample*0x7FFF, true);
+            pos += 2;
+        }
+        offset++;
+    }
+    return buffer2;
+}
+
+document.getElementById("cutBtn").onclick = async ()=>{
+    const start = parseFloat(document.getElementById("cutStart").value);
+    const end = parseFloat(document.getElementById("cutEnd").value);
+
+    const res = await fetch(player.src);
+    const arr = await res.arrayBuffer();
+    const buff = await audioCtx.decodeAudioData(arr);
+
+    const len = (end-start)*buff.sampleRate;
+    const off = new OfflineAudioContext(2, len, buff.sampleRate);
+
+    const src = off.createBufferSource();
+    src.buffer = buff;
+    src.connect(off.destination);
+    src.start(0, start, end-start);
+
+    off.startRendering().then(rendered=>{
+        let wav = audioBufferToWav(rendered);
+        let blob = new Blob([new DataView(wav)], {type:"audio/wav"});
+        lastBlob = blob;
+
+        let url = URL.createObjectURL(blob);
+        let a = document.createElement("a");
+        a.href = url;
+        a.download = "cut.wav";
+        a.click();
+    });
+};
+
+/* ================================================================
+    PIANO
+================================================================ */
+const notes = [
+    {note:"C4",freq:261.63},
+    {note:"D4",freq:293.66},
+    {note:"E4",freq:329.63},
+    {note:"F4",freq:349.23},
+    {note:"G4",freq:392},
+    {note:"A4",freq:440},
+    {note:"B4",freq:493.88},
+];
+
+const piano = document.getElementById("piano");
+notes.forEach(n=>{
+    let key=document.createElement("div");
+    key.className="key";
+    key.textContent=n.note;
+    key.onclick=()=>{
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.frequency.value=n.freq;
+        g.gain.setValueAtTime(1, audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime+1);
+        osc.connect(g);
+        g.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime+1);
+    };
+    piano.appendChild(key);
+});
+
+/* ================================================================
+    RECORDER
+================================================================ */
+let mediaRecorder;
+let chunks=[];
+let lastBlob=null;
+
+document.getElementById("recStart").onclick=async()=>{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    mediaRecorder=new MediaRecorder(stream);
+
+    mediaRecorder.ondataavailable=e=>chunks.push(e.data);
+    mediaRecorder.onstop=()=>{
+        const blob=new Blob(chunks,{type:"audio/webm"});
+        lastBlob=blob;
+        let url=URL.createObjectURL(blob);
+        const a=document.getElementById("recDownload");
+        a.href=url;
+        a.download="recording.webm";
+        a.style.display="inline-block";
+    };
+    chunks=[];
+    mediaRecorder.start();
+};
+
+document.getElementById("recStop").onclick=()=>mediaRecorder.stop();
+
+/* ================================================================
+    SHARE
+================================================================ */
+document.getElementById("shareBtn").onclick=async()=>{
+    if(!lastBlob) return alert("Tidak ada audio untuk dibagikan!");
+
+    if(!navigator.canShare) return alert("Browser tidak mendukung share API");
+
+    const file = new File([lastBlob],"audio.webm",{type:lastBlob.type});
+    await navigator.share({
+        title:"Bagikan Audio",
+        text:"Dibuat di FASTSONG",
+        files:[file]
+    });
+};
+
+/* ================================================================
+    SAVE PROJECT
+================================================================ */
+document.getElementById("saveProject").onclick=()=>{
+    const state={
+        volume:document.getElementById("volume").value,
+        speed:document.getElementById("speed").value,
+        bass:bass.gain.value,
+        treble:treble.gain.value,
+        eq10:eqBands.map(b=>b.gain.value)
+    };
+    localStorage.setItem("fastsongProject", JSON.stringify(state));
+    alert("Project saved!");
+};
+
+document.getElementById("loadProject").onclick=()=>{
+    const state=JSON.parse(localStorage.getItem("fastsongProject"));
+    if(!state) return alert("Tidak ada project tersimpan!");
+
+    document.getElementById("volume").value=state.volume;
+    document.getElementById("speed").value=state.speed;
+    bass.gain.value=state.bass;
+    treble.gain.value=state.treble;
+
+    state.eq10.forEach((g,i)=>eqBands[i].gain.value=g);
+
+    player.volume = state.volume;
+    player.playbackRate = state.speed;
+
+    alert("Project loaded!");
+};
+
+/* ================================================================
+    THEME TOGGLE
+================================================================ */
+document.getElementById("themeToggle").onclick=()=>{
+    document.body.classList.toggle("light");
+};
+
+/* ================================================================
+    SERVICE WORKER
+================================================================ */
+if("serviceWorker" in navigator){
+    navigator.serviceWorker.register("sw.js");
+}
+
+</script>
+</body>
+</html>
