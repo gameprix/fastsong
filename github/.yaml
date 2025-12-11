@@ -1,0 +1,11 @@
+
+- `base64/` → tempat semua potongan Base64 APK  
+- `download/` → tempat APK setelah digabung & decode  
+
+---
+
+## 2️⃣ Menggabungkan Base64 menjadi satu file
+
+### Linux / Mac
+```bash
+cat base64/fastsong_base64_part*.txt > fastsong_base64_full.txt
