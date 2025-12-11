@@ -1,0 +1,14 @@
+# robots.txt untuk FASTSONG PRO
+# Mengizinkan search engine menelusuri konten penting
+User-agent: *
+Allow: /
+
+# Jangan indeks halaman sensitif / file internal
+Disallow: /admin/
+Disallow: /private/
+Disallow: /wasm/
+Disallow: /scripts/
+Disallow: /config/
+
+# Sitemap
+Sitemap: https://fastsong.eu.org/sitemap.xml
