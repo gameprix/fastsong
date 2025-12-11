@@ -1,0 +1,4 @@
+const ffmpeg = createFFmpeg({
+  corePath: './wasm/ffmpeg-core.js',
+  wasmPath: './wasm/ffmpeg-core.wasm'
+});
