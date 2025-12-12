@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - Halaman Tidak Ditemukan</title>
+
+<!-- FAVICON + MANIFEST + ADSENSE + AMP AUT ADS + CSS UTAMA -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://fastsong.eu.org/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fastsong.eu.org/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://fastsong.eu.org/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="ui.css">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4633437485737999"
+crossorigin="anonymous"></script>
+<meta name="google-adsense-account" content="ca-pub-4633437485737999">
+
+<script async custom-element="amp-auto-ads"
+src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+</script>
+
+<style>
+    body {
+        background: #000;
+        color: #0f0;
+        font-family: 'Courier New', monospace;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    /* ANIMASI MATRIX */
+    canvas#matrix {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    /* TEKS GLITCH */
+    .glitch {
+        font-size: 90px;
+        font-weight: bold;
+        color: #0f0;
+        text-shadow:
+            0 0 8px #0f0,
+            0 0 16px #0f0;
+        animation: glitch 0.3s infinite;
+        margin-top: 100px;
+    }
+
+    @keyframes glitch {
+        0% { text-shadow: 4px 0 red, -4px 0 blue; }
+        50% { text-shadow: -4px 0 red, 4px 0 blue; }
+        100% { text-shadow: 4px 0 red, -4px 0 blue; }
+    }
+
+    .neon {
+        font-size: 22px;
+        color: #0f0;
+        margin-top: 20px;
+        text-shadow: 0 0 10px #0f0;
+    }
+
+    .countdown {
+        font-size: 24px;
+        margin-top: 15px;
+        color: #00ffff;
+        text-shadow: 0 0 8px #00ffff;
+    }
+
+    a {
+        color: #00ffff;
+        text-shadow: 0 0 8px #00ffff;
+    }
+</style>
+
+</head>
+<body>
+
+<!-- BACKGROUND MATRIX -->
+<canvas id="matrix"></canvas>
+
+<!-- GLITCH TITLE -->
+<div class="glitch">404</div>
+<p class="neon">Halaman tidak ditemukan.</p>
+
+<p class="countdown">
+    Dialihkan ke halaman utama dalam <span id="time">10</span> detik...
+</p>
+
+<p><a href="index.html">Klik di sini</a> untuk pindah manual.</p>
+
+<!-- SOUND EFFECT -->
+<audio id="errorSound" autoplay>
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-space-shooter-alert-1946.mp3" type="audio/mp3">
+</audio>
+
+<script>
+/* ===== REDIRECT TIMER ===== */
+let redirectTime = 10; // DETIK
+function startCountdown(){
+    document.getElementById("time").textContent = redirectTime;
+    redirectTime--;
+
+    if(redirectTime < 0){
+        window.location.href = "index.html";
+    } else {
+        setTimeout(startCountdown, 1000);
+    }
+}
+startCountdown();
+
+/* ===== MATRIX ANIMATION ===== */
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+let characters = "アァカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+characters = characters.split("");
+
+let fontSize = 14;
+let columns = canvas.width / fontSize;
+
+let drops = [];
+for (let x = 0; x < columns; x++) drops[x] = 1;
+
+function drawMatrix() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#0f0";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+        let text = characters[Math.floor(Math.random() * characters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+
+        drops[i]++;
+    }
+}
+setInterval(drawMatrix, 33);
+</script>
+
+</body>
+</html>
