@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arabic Keyboard Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        #output {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #ccc;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 24px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Arabic Keyboard Tool</h1>
+    <div id="output" contenteditable="true"></div>
+    <br>
+    <button onclick="insertArabicCharacter('ا')">ا</button>
+    <button onclick="insertArabicCharacter('ب')">ب</button>
+    <button onclick="insertArabicCharacter('ت')">ت</button>
+    <button onclick="insertArabicCharacter('ث')">ث</button>
+    <button onclick="insertArabicCharacter('ح')">ح</button>
+    <button onclick="insertArabicCharacter('خ')">خ</button>
+    <button onclick="insertArabicCharacter('د')">د</button>
+    <button onclick="insertArabicCharacter('ذ')">ذ</button>
+    <button onclick="insertArabicCharacter('ر')">ر</button>
+    <button onclick="insertArabicCharacter('ز')">ز</button>
+    <button onclick="insertArabicCharacter('س')">س</button>
+    <button onclick="insertArabicCharacter('ش')">ش</button>
+    <button onclick="insertArabicCharacter('ص')">ص</button>
+    <button onclick="insertArabicCharacter('ض')">ض</button>
+    <button onclick="insertArabicCharacter('ط')">ط</button>
+    <button onclick="insertArabicCharacter('ظ')">ظ</button>
+    <button onclick="insertArabicCharacter('ع')">ع</button>
+    <button onclick="insertArabicCharacter('غ')">غ</button>
+    <button onclick="insertArabicCharacter('ف')">ف</button>
+    <button onclick="insertArabicCharacter('ق')">ق</button>
+    <button onclick="insertArabicCharacter('ك')">ك</button>
+    <button onclick="insertArabicCharacter('ل')">ل</button>
+    <button onclick="insertArabicCharacter('م')">م</button>
+    <button onclick="insertArabicCharacter('ن')">ن</button>
+    <button onclick="insertArabicCharacter('ه')">ه</button>
+    <button onclick="insertArabicCharacter('ي')">ي</button>
+    <button onclick="deleteLastCharacter()">Delete Last</button>
+    <button onclick="insertSpace()">Space</button>
+
+    <script>
+        function insertArabicCharacter(character) {
+            const output = document.getElementById('output');
+            output.innerText += character;
+            output.focus();
+        }
+
+        function deleteLastCharacter() {
+            const output = document.getElementById('output');
+            output.innerText = output.innerText.slice(0, -1);
+            output.focus();
+        }
+
+        function insertSpace() {
+            const output = document.getElementById('output');
+            output.innerText += ' ';
+            output.focus();
+        }
+    </script>
+
+</body>
+</html>

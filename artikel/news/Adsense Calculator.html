@@ -1,0 +1,61 @@
+# Adsense Calculator
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adsense Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Adsense Revenue Calculator</h1>
+    <label for="pageViews">Monthly Page Views:</label>
+    <input type="number" id="pageViews" placeholder="Enter your monthly page views">
+
+    <label for="ctr">Click-Through Rate (CTR) %:</label>
+    <input type="number" id="ctr" placeholder="Enter your CTR">
+
+    <label for="cpc">Cost Per Click (CPC) $:</label>
+    <input type="number" id="cpc" placeholder="Enter your CPC">
+
+    <button onclick="calculateAdsense()">Calculate Adsense Revenue</button>
+
+    <h2 id="result"></h2>
+
+    <script>
+        function calculateAdsense() {
+            var pageViews = document.getElementById('pageViews').value;
+            var ctr = document.getElementById('ctr').value / 100;
+            var cpc = document.getElementById('cpc').value;
+
+            var clicks = pageViews * ctr;
+            var revenue = clicks * cpc;
+
+            document.getElementById('result').innerText = "Estimated Monthly Revenue: $" + revenue.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
