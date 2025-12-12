@@ -13,7 +13,6 @@
 <!-- Google Adsense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4633437485737999" crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-4633437485737999">
-<script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 
 <!-- PWA -->
 <link rel="manifest" href="manifest.json">
@@ -23,7 +22,7 @@
 <link rel="stylesheet" href="ui.css">
 
 <!-- Video.js CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/8.23.4/video-js.min.css" rel="stylesheet" integrity="sha512-frQAbRblLAB27W72seJtP+PijHuCtSfQ+k+LS7M4v27gjKb5doigt4khTLCwILnWz8sd+MPu3Qzkaduq4dwitA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/8.23.4/video-js.min.css" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
 body{background:#121212; color:#fff; font-family:Arial,sans-serif; margin:0; padding:0;}
@@ -34,8 +33,10 @@ input,select{background:#1f1f1f; color:#fff;}
 button{background:#ff4747; color:#fff; cursor:pointer; transition:0.3s;}
 button:hover{background:#e33c3c;}
 .video-container{margin-top:20px;}
-.share-buttons{margin-top:15px;}
-.share-buttons button{width:auto; margin:5px; padding:10px 15px; border-radius:6px;}
+.playlist-item{margin-top:15px; background:#1f1f1f; padding:10px; border-radius:8px;}
+.playlist-item h3{margin:0 0 5px 0; font-size:18px;}
+.share-buttons{margin-top:10px;}
+.share-buttons button{width:auto; margin:5px; padding:8px 12px; border-radius:6px;}
 .wa{background:#1bd741;}
 .fb{background:#1877f2;}
 .tg{background:#0088cc;}
@@ -48,33 +49,27 @@ button:hover{background:#e33c3c;}
 <header>FASTSONG</header>
 
 <div class="container">
+    <input type="text" id="song-title" placeholder="Masukkan Judul Lagu...">
     <input type="text" id="yt-url" placeholder="Masukkan URL YouTube...">
     <select id="format">
         <option value="mp4">MP4 (Video)</option>
         <option value="mp3">MP3 (Audio)</option>
     </select>
-    <button onclick="addVideo()">Tampilkan Video/Audio</button>
+    <button onclick="addVideo()">Tambahkan ke Playlist</button>
 
     <div class="video-container">
         <video id="player" class="video-js vjs-default-skin" controls preload="auto" width="720" height="400"></video>
     </div>
 
-    <div class="share-buttons">
-        <button class="copy-btn" onclick="copyLink()">Copy Link</button>
-        <button class="wa" onclick="shareWA()">WhatsApp</button>
-        <button class="fb" onclick="shareFB()">Facebook</button>
-        <button class="tg" onclick="shareTG()">Telegram</button>
-        <button class="tw" onclick="shareTW()">Twitter</button>
-    </div>
+    <div id="playlist-container"></div>
 </div>
 
 <!-- JS Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/8.23.4/video.min.js" integrity="sha512-frQAbRblLAB27W72seJtP+PijHuCtSfQ+k+LS7M4v27gjKb5doigt4khTLCwILnWz8sd+MPu3Qzkaduq4dwitA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-youtube/3.0.1/Youtube.js" integrity="sha512-U0OTmn6sp7s4GEL5vB45aX15fnXLydyDeaqAERRbf8DnVgo+ZwhUm674/ozek44R+nvuHgM2779EH2TXyUgrzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-playlists/0.2.0/videojs-playlists.min.js" integrity="sha512-UB+FLwO4PR/gLVdGOV3RmJj1CD4uXt7fPTNJ5mP7CRR+coZtfJrHtJxZER/0BpPsZPWkRM/+9F8WNDNUqACV6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.8/download.min.js" integrity="sha512-WiGQZv8WpmQVRUFXZywo7pHIO0G/o3RyiAJZj8YXNN4AV7ReR1RYWVmZJ6y3H06blPcjJmG/sBpOVZjTSFFlzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aurora.js-mp3/0.1.0/mp3.min.js" integrity="sha512-pzWFe7OanIWEqw6rV6K1gkFa6Qkjkve797/7HdxsEZHAdV/OKatQ2YB2hHMaXNNJUizL1HBMjPV6wPt5RpXlMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/8.23.4/video.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-youtube/3.0.1/Youtube.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-playlists/0.2.0/videojs-playlists.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aurora.js-mp3/0.1.0/mp3.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
 let player = videojs('player');
@@ -88,29 +83,54 @@ function getYouTubeID(url){
 
 function addVideo(){
     const url = document.getElementById('yt-url').value.trim();
+    const title = document.getElementById('song-title').value.trim() || "Judul Tidak Diketahui";
     const format = document.getElementById('format').value;
     const videoID = getYouTubeID(url);
 
-    if(!videoID){ alert("URL tidak valid!"); return; }
+    if(!videoID && format==='mp4'){ alert("URL YouTube tidak valid!"); return; }
 
     let source;
     if(format==='mp4'){
-        source = { src: `https://www.youtube.com/watch?v=${videoID}`, type: 'video/youtube' };
-    } else { 
-        source = { src: 'https://sample.cat/en/mp3/file_example_MP3_700KB.mp3', type: 'audio/mp3' };
+        source = { src: `https://www.youtube.com/watch?v=${videoID}`, type: 'video/youtube', title: title };
+    } else {
+        // MP3 sample legal
+        source = { src: 'https://sample.cat/en/mp3/file_example_MP3_700KB.mp3', type: 'audio/mp3', title: title };
     }
 
     playlist.push(source);
     player.playlist(playlist);
     player.playlist.currentItem(playlist.length-1);
+
+    renderPlaylist();
 }
 
-// Tombol Share
-function copyLink(){ navigator.clipboard.writeText(document.getElementById('yt-url').value); alert('Link disalin!'); }
-function shareWA(){ window.open(`https://wa.me/?text=${encodeURIComponent(document.getElementById('yt-url').value)}`); }
-function shareFB(){ window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(document.getElementById('yt-url').value)}`); }
-function shareTG(){ window.open(`https://t.me/share/url?url=${encodeURIComponent(document.getElementById('yt-url').value)}`); }
-function shareTW(){ window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(document.getElementById('yt-url').value)}`); }
+function renderPlaylist(){
+    const container = document.getElementById('playlist-container');
+    container.innerHTML = '';
+    playlist.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'playlist-item';
+        div.innerHTML = `
+            <h3>${item.title}</h3>
+            <div class="share-buttons">
+                <button class="copy-btn" onclick="copyLink('${index}')">Copy Link</button>
+                <button class="wa" onclick="shareWA('${index}')">WhatsApp</button>
+                <button class="fb" onclick="shareFB('${index}')">Facebook</button>
+                <button class="tg" onclick="shareTG('${index}')">Telegram</button>
+                <button class="tw" onclick="shareTW('${index}')">Twitter</button>
+            </div>
+        `;
+        div.addEventListener('click', () => { player.playlist.currentItem(index); });
+        container.appendChild(div);
+    });
+}
+
+// Share functions
+function copyLink(index){ navigator.clipboard.writeText(playlist[index].src); alert('Link disalin!'); }
+function shareWA(index){ window.open(`https://wa.me/?text=${encodeURIComponent(playlist[index].src)}`); }
+function shareFB(index){ window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(playlist[index].src)}`); }
+function shareTG(index){ window.open(`https://t.me/share/url?url=${encodeURIComponent(playlist[index].src)}`); }
+function shareTW(index){ window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(playlist[index].src)}`); }
 </script>
 
 </body>
