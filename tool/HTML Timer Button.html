@@ -1,0 +1,38 @@
+
+    <style>
+        
+        .timer-button {
+            padding: 15px 30px;
+            font-size: 16px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .timer-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function startTimer() {
+            let countdown = 30;
+            const timerDisplay = document.getElementById('timer');
+            const interval = setInterval(() => {
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    window.location.href = ' https://checktoolsblog.blogspot.com/p/free-article-rewriter.html '; // Replace with your URL
+                } else {
+                    timerDisplay.textContent = countdown;
+                    countdown--;
+                }
+            }, 1000);
+        }
+    </script>
+
+    <h1>Click the Button to Oppen Free Article Riwriter Tool</h1>
+    
+    <button onclick="startTimer()" class="timer-button" id="startTimer">View Tools Now</button>
+    <p>Redirecting in <span id="timer">30</span> seconds...</p>
+

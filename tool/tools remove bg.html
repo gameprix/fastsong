@@ -1,0 +1,191 @@
+<h1 class='post_entry_title'>Remove Background</h1>
+<div class='post_body' id='post_body'>
+<div id='post_middle'>
+
+
+<style>
+  /* Add styles for the skeleton overlay */
+  .rmbg_wrapper{
+    position: relative;
+  }
+
+  .skeleton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 245px;
+    background-color: #eee;
+    background-image: linear-gradient(90deg, #eee 0px, #fff 40px, #eee 80px);
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    animation: skeleton 1.5s linear infinite;
+  }
+
+  @keyframes skeleton {
+    0% {
+      background-position: -100%;
+    }
+    100% {
+      background-position: 100%;
+    }
+  }
+
+  /* Style for the container div */
+  .rmbg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rmbg_input {
+    margin: 20px 0;
+  }
+
+  #file-input {
+    display: none;
+  }
+
+  .rmbg_result {
+    display: none; /* Hide the result container initially */
+    border-radius: 2px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.161);
+    margin: 20px auto;
+    max-width: 100%;
+    flex-direction: column!important;
+    padding: 15px;
+    position: relative;
+  }
+
+  .rmbg_result .row {
+    display: flex;    
+    place-items: center;
+  }
+
+  #result-image {
+    border: 1px solid #ccc;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+  }
+
+  #download-button {
+    display: none;
+    padding: 5px 20px;
+    background-color: #007bff;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 24px;
+  }
+
+  #download-button:hover {
+    background-color: #0056b3;
+  }
+
+  .img_input {
+    border-radius: 99px;
+    font-size: 1.25rem;
+    display: block;
+    line-height: 1.5;
+    padding: 0.75rem 2rem;
+    width: auto;
+    background-color: #0f70e6;
+    border-color: #0f70e6;
+    color: #fff;
+    user-select: none;
+    vertical-align: middle;
+  }
+
+  .img_input svg {
+    width: 25px;
+    height: 25px;
+    line-height: initial;
+    fill: #fff;
+    margin-right: 4px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .col-1 {
+    flex: 0 0 66.6666666667%;
+    max-width: 66.6666666667%;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+    width: 100%;
+    margin: 0;
+  }
+
+  .col-2 {
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+  }
+
+  .col-2 p {
+    margin: 0;
+    line-height: 1.5;font-size: 14px;
+    display: block;padding-bottom: 12px;
+  }
+  @media (max-width: 480px){.rmbg_result .row{flex-direction: column;gap:12px}.col-1,.col-2{max-width: 100%!important;}}
+  /* Add skeleton overlay for the text inside the container */
+  .rmbg_result.skeleton .skeleton-overlay-text {
+    background-image: linear-gradient(90deg, #eee 0px, #fff 100px, #eee 200px);
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    animation: skeleton-text 1.5s linear infinite;
+  }
+  
+  /* Add skeleton animation to the text */
+  @keyframes skeleton-text {
+    0% {
+      background-position: -100%;
+    }
+    100% {
+      background-position: 100%;
+    }
+  }
+</style>
+
+<div class="rmbg">
+  <div class="rmbg_input">
+    <label for="file-input" class="img_input">
+      <svg viewBox="0 0 24 24">
+        <title>upload</title>
+        <path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" />
+      </svg>
+      Upload Image
+    </label>
+    <input type="file" id="file-input" />
+  </div>
+  <div class="rmbg_wrapper">
+  <div class="rmbg_result">
+    <div class="row">
+      <div class="col-1">
+        <img alt="Result Image" id="result-image" loading="lazy" src="" />
+      </div>
+      <div class="col-2">
+        <p class="skeleton-overlay-text">Click the Download button to download the image</p>
+        <a id="download-button" href="#" download>Download</a>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<script>
+
+   // X-Api-Key
+ const apiKey = 'EoTk15gWWQCjGaSFs8yYZPZS';
+const _0x244663=_0x2c64;function _0x2d11(){const _0x3e8024=['BM9Uzq','yMXVyG','y2f0y2G','mJe3nteWmgfQww9iEa','zMLSzxm','y2XHC3nmAxn0','mti2mtC3m3fXrMDWBW','ue9tva','yxbWzw5K','mte0odqZmfn0EuzrAG','rxjYB3i6','Ahr0Chm6lY9HCgKUCMvTB3zLlMjNl3yXlJaVCMvTB3zLyMC','Aw1Hz2vFzMLSzq','nZm0mti0BMTVz3zK','y3jLyxrLt2jQzwn0vvjm','ywrKrxzLBNrmAxn0zw5LCG','y2HHBMDL','zxjYB3i','DgHLBG','yMXVy2S','ofDxAhDkrW','zgLZCgXHEq','yxv0BW','mJm2nZmZtLfjC2P5','zMXLEa','mtKXnZq2mxvJyMjKtq','mJberNjxDge','mZyWmZm5AvjcC0X5','C2TLBgv0B24','z2v0rwXLBwvUDej5swq','C3r5Bgu','C3jJ','AhjLzG','lNjTyMDFCMvZDwX0','nw1IAuXjqG','CxvLCNLtzwXLy3rVCG'];_0x2d11=function(){return _0x3e8024;};return _0x2d11();}function _0x2c64(_0x3a2f3a,_0x223c50){const _0x2d1176=_0x2d11();return _0x2c64=function(_0x2c64c4,_0x565f8a){_0x2c64c4=_0x2c64c4-0x14d;let _0x4e7e0e=_0x2d1176[_0x2c64c4];if(_0x2c64['guztQe']===undefined){var _0x5e818b=function(_0x484994){const _0x46c488='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x20246a='',_0x248abe='';for(let _0x51e195=0x0,_0x12a456,_0xba4899,_0x6be0d4=0x0;_0xba4899=_0x484994['charAt'](_0x6be0d4++);~_0xba4899&&(_0x12a456=_0x51e195%0x4?_0x12a456*0x40+_0xba4899:_0xba4899,_0x51e195++%0x4)?_0x20246a+=String['fromCharCode'](0xff&_0x12a456>>(-0x2*_0x51e195&0x6)):0x0){_0xba4899=_0x46c488['indexOf'](_0xba4899);}for(let _0x5fa7c3=0x0,_0x5c85c9=_0x20246a['length'];_0x5fa7c3<_0x5c85c9;_0x5fa7c3++){_0x248abe+='%'+('00'+_0x20246a['charCodeAt'](_0x5fa7c3)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x248abe);};_0x2c64['ZQHxxi']=_0x5e818b,_0x3a2f3a=arguments,_0x2c64['guztQe']=!![];}const _0x248c2c=_0x2d1176[0x0],_0x260974=_0x2c64c4+_0x248c2c,_0x3ab6bd=_0x3a2f3a[_0x260974];return!_0x3ab6bd?(_0x4e7e0e=_0x2c64['ZQHxxi'](_0x4e7e0e),_0x3a2f3a[_0x260974]=_0x4e7e0e):_0x4e7e0e=_0x3ab6bd,_0x4e7e0e;},_0x2c64(_0x3a2f3a,_0x223c50);}(function(_0x27233d,_0x18e545){const _0x34b767=_0x2c64,_0x22b76c=_0x27233d();while(!![]){try{const _0x5d1a21=-parseInt(_0x34b767(0x162))/0x1+-parseInt(_0x34b767(0x154))/0x2+parseInt(_0x34b767(0x15e))/0x3*(parseInt(_0x34b767(0x161))/0x4)+-parseInt(_0x34b767(0x169))/0x5*(-parseInt(_0x34b767(0x150))/0x6)+parseInt(_0x34b767(0x160))/0x7+-parseInt(_0x34b767(0x15b))/0x8*(parseInt(_0x34b767(0x14d))/0x9)+parseInt(_0x34b767(0x16e))/0xa;if(_0x5d1a21===_0x18e545)break;else _0x22b76c['push'](_0x22b76c['shift']());}catch(_0x36823a){_0x22b76c['push'](_0x22b76c['shift']());}}}(_0x2d11,0x33383));const fileInput=document[_0x244663(0x164)]('file-input'),downloadButton=document[_0x244663(0x164)]('download-button'),resultImage=document[_0x244663(0x164)]('result-image'),resultContainer=document[_0x244663(0x16a)](_0x244663(0x168)),handleFileUpload=()=>{const _0x37e8f4=_0x244663;let _0x484994=fileInput[_0x37e8f4(0x16f)][0x0],_0x46c488=new FormData();_0x46c488['append']('size',_0x37e8f4(0x15d)),_0x46c488[_0x37e8f4(0x14f)](_0x37e8f4(0x153),_0x484994),resultContainer[_0x37e8f4(0x165)]['display']=_0x37e8f4(0x16b),downloadButton[_0x37e8f4(0x165)][_0x37e8f4(0x15c)]=_0x37e8f4(0x16b),resultContainer[_0x37e8f4(0x170)]['add'](_0x37e8f4(0x163)),fetch(_0x37e8f4(0x152),{'method':_0x37e8f4(0x14e),'headers':{'X-Api-Key':apiKey},'body':_0x46c488})[_0x37e8f4(0x159)](_0x20246a=>_0x20246a[_0x37e8f4(0x16c)]())[_0x37e8f4(0x159)](_0x248abe=>{const _0x5d8ce8=_0x37e8f4;let _0x51e195=URL[_0x5d8ce8(0x155)](_0x248abe);resultImage[_0x5d8ce8(0x166)]=_0x51e195,downloadButton[_0x5d8ce8(0x165)][_0x5d8ce8(0x15c)]=_0x5d8ce8(0x15a),downloadButton[_0x5d8ce8(0x167)]=_0x51e195,resultContainer['classList']['remove'](_0x5d8ce8(0x163)),resultContainer[_0x5d8ce8(0x165)][_0x5d8ce8(0x15c)]=_0x5d8ce8(0x15f);})[_0x37e8f4(0x16d)](_0x12a456=>{const _0x11d9bc=_0x37e8f4;console[_0x11d9bc(0x158)](_0x11d9bc(0x151),_0x12a456);});};fileInput[_0x244663(0x156)](_0x244663(0x157),handleFileUpload);
+  
+</script>
+</div>
+</div>
+</article>

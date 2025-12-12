@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Hover to Image Show - Finansial.biz.id</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            color: #000;
+            width: 100%;
+            cursor: default;
+        }
+
+        #main-container{
+            position: relative;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+
+        }
+
+        ul li {
+            border-bottom: 2px solid #333;
+            padding: 30px 0px;
+        }
+
+        ul li h1 {
+            font-size: 4vw;
+            z-index: 9;
+        }
+
+        ul img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0;
+            /* transform: translate(-50%, -50%); */
+            transition: all linear 0.3s;
+            mix-blend-mode: difference;
+            z-index: 1;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-conatiner">
+        <ul>
+            <li>
+                <h1>Mountain</h1>
+                <img src="https://images.unsplash.com/photo-1554629947-334ff61d85dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1936&q=80"
+                    alt="">
+            </li>
+            <li>
+                <h1>Forest</h1>
+                <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=841&q=80"
+                    alt="">
+            </li>
+            <li>
+                <h1>Sky</h1>
+                <img src="https://images.unsplash.com/photo-1508020963102-c6c723be5764?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                    alt="">
+            </li>
+            <li>
+                <h1>Rocket</h1>
+                <img src="https://images.unsplash.com/photo-1628126235206-5260b9ea6441?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80"
+                    alt="">
+            </li>
+            <li>
+                <h1>Car</h1>
+                <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                    alt="">
+            </li>
+        </ul>
+    </div>
+    <script>
+        let li = document.querySelectorAll('li');
+        let img = document.querySelectorAll('img');
+
+        li.forEach(function (all) {
+            all.addEventListener('mouseover', function () {
+                all.childNodes[3].style.opacity = 1;
+            })
+            all.addEventListener('mouseleave', function () {
+                all.childNodes[3].style.opacity = 0;
+            })
+            all.addEventListener('mousemove', function (dets) {
+                all.childNodes[3].style.left = dets.x + 'px';
+                all.childNodes[3].style.top = dets.y + 'px';
+            })
+
+        });
+    </script>
+</body>
+
+</html>

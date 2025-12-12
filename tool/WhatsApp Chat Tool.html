@@ -1,0 +1,28 @@
+# Chat Tool for WhatsApp
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Chat Tool</title>
+    <script>
+        function sendMessage() {
+            const message = document.getElementById('messageInput').value;
+            const phoneNumber = document.getElementById('phoneInput').value;
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</head>
+<body>
+    <h1>WhatsApp Chat Tool</h1>
+    <label for="phoneInput">Phone Number:</label>
+    <input type="text" id="phoneInput" placeholder="Enter phone number" required>
+    <br>
+    <label for="messageInput">Message:</label>
+    <input type="text" id="messageInput" placeholder="Enter your message" required>
+    <br>
+    <button onclick="sendMessage()">Send Message</button>
+</body>
+</html>

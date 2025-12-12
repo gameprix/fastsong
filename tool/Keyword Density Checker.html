@@ -1,0 +1,64 @@
+# Keyword Density Checker
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyword Density Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Keyword Density Checker</h1>
+    <label for="urlInput">Enter URL:</label>
+    <input type="text" id="urlInput" placeholder="https://example.com">
+    <button onclick="checkDensity()">Check Density</button>
+    
+    <h2>Output</h2>
+    <textarea id="output" readonly></textarea>
+    <button onclick="copyToClipboard()">Copy to Clipboard</button>
+
+    <script>
+        async function checkDensity() {
+            const url = document.getElementById('urlInput').value;
+            const response = await fetch(url);
+            const text = await response.text();
+            const keywordDensity = calculateKeywordDensity(text);
+            document.getElementById('output').value = JSON.stringify(keywordDensity, null, 2);
+        }
+
+        function calculateKeywordDensity(text) {
+            const words = text.match(/\w+/g);
+            const totalWords = words.length;
+            const keywordCount = {};
+            words.forEach(word => {
+                word = word.toLowerCase();
+                keywordCount[word] = (keywordCount[word] || 0) + 1;
+            });
+            for (const word in keywordCount) {
+                keywordCount[word] = (keywordCount[word] / totalWords * 100).toFixed(2);
+            }
+            return keywordCount;
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            alert('Copied to clipboard!');
+        }
+    </script>
+</body>
+</html>

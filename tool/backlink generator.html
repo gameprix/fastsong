@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backlink Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Backlink Checker</h1>
+<input type="text" id="urlInput" placeholder="Enter URLs separated by commas" />
+<button id="checkButton">Check Backlinks</button>
+<table id="resultsTable">
+    <thead>
+        <tr>
+            <th>URL</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    document.getElementById('checkButton').addEventListener('click', function() {
+        const urls = document.getElementById('urlInput').value.split(',');
+        const resultsTable = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
+        resultsTable.innerHTML = '';
+
+        urls.forEach(url => {
+            const trimmedUrl = url.trim();
+            const row = resultsTable.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = trimmedUrl;
+
+            // Simulating a backlink check
+            fetch(`https://api.example.com/check?url=${encodeURIComponent(trimmedUrl)}`)
+                .then(response => response.json())
+                .then(data => {
+                    cell2.textContent = data.status ? 'Backlink Found' : 'No Backlink';
+                })
+                .catch(error => {
+                    cell2.textContent = 'Error';
+                });
+        });
+    });
+</script>
+
+</body>
+</html>

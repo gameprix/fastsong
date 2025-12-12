@@ -1,0 +1,78 @@
+To create a JavaScript script that parses HTML code and extracts specific elements or attributes, you can use the DOM (Document Object Model) API. Below is a basic example of how you can parse an HTML string using JavaScript, extract elements, and process them.
+
+This example demonstrates how to extract all the `<a>` (anchor) tags from a given HTML string, retrieve their `href` attributes, and display the result.
+
+### Code to Parse HTML in JavaScript
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Parser Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>HTML Parser Example</h1>
+
+    <textarea id="htmlInput" rows="8" cols="50" placeholder="Paste your HTML code here"></textarea>
+    <br>
+    <button id="parseButton">Parse HTML</button>
+
+    <div class="result">
+        <h2>Parsed Links:</h2>
+        <ul id="parsedLinks"></ul>
+    </div>
+
+    <script>
+        document.getElementById('parseButton').addEventListener('click', function () {
+            // Get the HTML from the textarea input
+            const htmlString = document.getElementById('htmlInput').value;
+
+            // Parse the HTML string using DOMParser
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlString, 'text/html');
+
+            // Get all anchor (<a>) elements
+            const anchors = doc.querySelectorAll('a');
+
+            // Clear the previous results
+            const parsedLinks = document.getElementById('parsedLinks');
+            parsedLinks.innerHTML = '';
+
+            // Loop through each anchor tag and display the href attribute
+            anchors.forEach(anchor => {
+                const li = document.createElement('li');
+                li.textContent = `Text: ${anchor.textContent}, Href: ${anchor.href}`;
+                parsedLinks.appendChild(li);
+            });
+        });
+    </script>
+
+</body>
+</html>
+```
+
+### Explanation:
+
+- **HTML Input**: The user pastes an HTML snippet into a `<textarea>`.
+- **DOMParser**: This JavaScript class is used to parse the HTML string into a DOM document.
+- **querySelectorAll('a')**: Extracts all the `<a>` (anchor) tags from the parsed HTML.
+- **JavaScript Event**: When the "Parse HTML" button is clicked, the JavaScript processes the input and displays the `href` attributes of all anchor tags in a list.
+
+### Features:
+1. **DOM Parsing**: Uses the `DOMParser` API to convert an HTML string into a DOM tree, enabling traversal and manipulation of HTML elements.
+2. **Event Handling**: The button click triggers the parsing process.
+3. **Result Display**: Parsed results (link texts and URLs) are dynamically shown in an unordered list (`<ul>`).
+
+This code can be easily extended to parse other HTML tags, extract attributes like `src` from images or links, or even manipulate the parsed HTML.
+

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Generator Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #fontGenerator {
+            margin-top: 20px;
+        }
+        #output {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Font Generator Tool</h1>
+    <div id="fontGenerator">
+        <label for="textInput">Enter Text:</label>
+        <input type="text" id="textInput" placeholder="Type something...">
+        
+        <label for="fontSelect">Select Font:</label>
+        <select id="fontSelect">
+    
+            <option value="Arial">Arial</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Impact">Impact</option>
+            <option value="Lucida Console">Lucida Console</option>
+            <option value="Palatino Linotype">Palatino Linotype</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Arial Black">Arial Black</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Bookman">Bookman</option>
+            <option value="Arial Narrow">Arial Narrow</option>
+            <option value="Century Gothic">Century Gothic</option>
+            <option value="Comic Sans">Comic Sans</option>
+            <option value="Frank Ruhl Libre">Frank Ruhl Libre</option>
+            <option value="Futura">Futura</option>
+            <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+            <option value="Segoe UI">Segoe UI</option>
+            <option value="Baskerville">Baskerville</option>
+            <option value="Optima">Optima</option>
+            <option value="Rockwell">Rockwell</option>
+            <option value="Arial Rounded MT Bold">Arial Rounded MT Bold</option>
+            <option value="Copperplate">Copperplate</option>
+            <option value="Didot">Didot</option>
+            <option value="Bodoni MT">Bodoni MT</option>
+            <option value="Miriam Libre">Miriam Libre</option>
+            <option value="Noto Sans">Noto Sans</option>
+            <option value="Raleway">Raleway</option>
+            <option value="Roboto">Roboto</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Lora">Lora</option>
+            <option value="Oswald">Oswald</option>
+            <option value="Poppins">Poppins</option>
+            <option value="Source Sans Pro">Source Sans Pro</option>
+            <option value="Ubuntu">Ubuntu</option>
+            <option value="Droid Sans">Droid Sans</option>
+            <option value="Open Sans">Open Sans</option>
+            <option value="Lato">Lato</option>
+            <option value="PT Sans">PT Sans</option>
+            <option value="Playfair Display">Playfair Display</option>
+            <option value="Noto Serif">Noto Serif</option>
+            <option value="Raleway Dots">Raleway Dots</option>
+            <option value="Quicksand">Quicksand</option>
+            <option value="Zilla Slab">Zilla Slab</option>
+            <option value="Dancing Script">Dancing Script</option>
+            <option value="Sacramento">Sacramento</option>
+            <option value="Satisfy">Satisfy</option>
+            <option value="Lobster">Lobster</option>
+            <option value="Pacifico">Pacifico</option>
+            <option value="Great Vibes">Great Vibes</option>
+            <option value="Allura">Allura</option>
+            <option value="Cookie">Cookie</option>
+            <option value="Dancing Script">Dancing Script</option>
+            <option value="Pinyon Script">Pinyon Script</option>
+            <option value="Satisfy">Satisfy</option>
+            <option value="Rock Salt">Rock Salt</option>
+            <option value="Righteous">Righteous</option>
+            <option value="Bungee">Bungee</option>
+            <option value="Caveat">Caveat</option>
+            <option value="Fredericka the Great">Fredericka the Great</option>
+            <option value="Monoton">Monoton</option>
+            <option value="Ranchers">Ranchers</option>
+            <option value="Sonsie One">Sonsie One</option>
+            <option value="Unica77">Unica77</option>
+            <option value="Vampiro One">Vampiro One</option>
+            <option value="Zeyada">Zeyada</option>
+            <option value="Alfa Slab One">Alfa Slab One</option>
+            <option value="Bungee Inline">Bungee Inline</option>
+            <option value="Bungee Shade">Bungee Shade</option>
+            <option value="Bungee Hairline">Bungee Hairline</option>
+            <option value="Bungee Outline">Bungee Outline</option>
+            <option value="Bungee Regular">Bungee Regular</option>
+            <option value="Bungee Semi Condensed">Bungee Semi Condensed</option>
+            <option value="Bungee Condensed">Bungee Condensed</option>
+            <option value="Bungee Extra Condensed">Bungee Extra Condensed</option>
+            <option value="Bungee Extra Bold">Bungee Extra Bold</option>
+            <option value="Bungee Bold">Bungee Bold</option>
+            <option value="Bungee Light">Bungee Light</option>
+            <option value="Bungee Thin">Bungee Thin</option>
+            <option value="Bungee Ultra Light">Bungee Ultra Light</option>
+            <option value="Bungee Ultra Bold">Bungee Ultra Bold</option>
+            <option value="Bungee Ultra Thin">Bungee Ultra Thin</option>
+            <option value="Bungee Ultra Extra Bold">Bungee Ultra Extra Bold</option>
+            <option value="Bungee Ultra Extra Light">Bungee Ultra Extra Light</option>
+            <option value="Bungee Ultra Semi Bold">Bungee Ultra Semi Bold</option>
+            <option value="Bungee Ultra Semi Light">Bungee Ultra Semi Light</option>
+            <option value="Bungee Ultra Semi Condensed">Bungee Ultra Semi Condensed</option>
+            <option value="Bungee Ultra Semi Extra Condensed">Bungee Ultra Semi Extra Condensed</option>
+            <option value="Bungee Ultra Semi Extra Bold">Bungee Ultra Semi Extra Bold</option>
+            <option value="Bungee Ultra Semi Extra Light">Bungee Ultra Semi Extra Light</option>
+            <option value="Bungee Ultra Semi Extra Thin">Bungee Ultra Semi Extra Thin</option>
+            <option value="Bungee Ultra Semi Extra Extra Bold">Bungee Ultra Semi Extra Extra Bold</option>
+            <option value="Bungee Ultra Semi Extra Extra Light">Bungee Ultra Semi Extra Extra Light</option>
+            <option value="Bungee Ultra Semi Extra Extra Thin">Bungee Ultra Semi Extra Extra Thin</option>
+            <option value="Bungee Ultra Semi Extra Extra Extra Bold">Bungee Ultra Semi Extra Extra Extra Bold</option>
+            <option value="Bungee Ultra Semi Extra Extra Extra Light">Bungee Ultra Semi Extra Extra Extra Light</option>
+            <option value="Bungee Ultra Semi Extra Extra Extra Thin">Bungee Ultra Semi Extra Extra Extra Thin</option>
+            </select>
+            
+            
+        
+        <button id="generateButton">Generate</button>
+    </div>
+    
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('generateButton').addEventListener('click', function() {
+            const text = document.getElementById('textInput').value;
+            const font = document.getElementById('fontSelect').value;
+            const outputDiv = document.getElementById('output');
+            outputDiv.style.fontFamily = font;
+            outputDiv.textContent = text;
+        });
+    </script>
+</body>
+</html>

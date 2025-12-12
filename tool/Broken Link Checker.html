@@ -1,0 +1,60 @@
+# Broken Link Checker
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broken Link Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #output {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Broken Link Checker</h1>
+<input type="text" id="urlInput" placeholder="Enter URL to check" />
+<button id="checkButton">Check Links</button>
+
+<div id="output"></div>
+<button id="copyButton" style="display:none;">Copy Output</button>
+
+<script>
+    document.getElementById('checkButton').addEventListener('click', function() {
+        const url = document.getElementById('urlInput').value;
+        // Simulated output for demonstration purposes
+        const outputText = `Checking links for: ${url}\n\nBroken Links:\n- http://example.com/broken1\n- http://example.com/broken2`;
+        document.getElementById('output').innerText = outputText;
+        document.getElementById('copyButton').style.display = 'block';
+    });
+
+    document.getElementById('copyButton').addEventListener('click', function() {
+        const output = document.getElementById('output').innerText;
+        navigator.clipboard.writeText(output).then(() => {
+            alert('Output copied to clipboard!');
+        });
+    });
+</script>
+
+</body>
+</html>

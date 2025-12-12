@@ -1,0 +1,30 @@
+# Blog Finder
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Finder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Blog Finder</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Search for Blogs</h2>
+            <form id="searchForm">
+                <input type="text" id="searchInput" placeholder="Enter blog topic..." required>
+                <button type="submit">Search</button>
+            </form>
+        </section>
+        <section id="results">
+            <h2>Search Results</h2>
+            <ul id="blogList"></ul>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

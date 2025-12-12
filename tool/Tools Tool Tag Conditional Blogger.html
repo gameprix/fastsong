@@ -1,0 +1,285 @@
+<h1>Tools Tool Tag Conditional Blogger Generator Online</h1>
+<p>
+Tools Tag Kondisi Generator Online Untuk Blogspot adalah tool online yang dibangun oleh Shan Eapen Koshy, berfungsi untuk menyederhanakan pembungkus tag kondisional pada blogspot. Contoh misalkan Anda ingin menambahkan kode adsense ke halaman tertentu dari pada blogspot Anda, yang harus Anda lakukan hanyalah copy paste kode adsense ke dalam kotak yang disediakan, kemudian pilih kondisi yang anda inginkan dan klik tombol <b>Encode dan Wrap</b>. Anda tidak perlu lagi pusing mencari-cari tag kondisi blogger di internet, cukup gunakan tool tag kondisi generator online di halaman ini, silahkan anda bookmark halaman ini supaya tidak lupa ya.
+</p>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-39379599-5', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+ <script>
+function wrap() {
+   var selectedOption = document.getElementById("mySelect");
+   var codeField = document.getElementById("codeField");
+   var lineBreak = "\n";
+   codeField.value = selectedOption.value + lineBreak + codeField.value + lineBreak + "</b:if>";
+}
+
+function htmlParser() {
+   var re = /[<>"'&]/g
+   for (i = 0; i < arguments.length; i++)
+      arguments[i].value = arguments[i].value.replace(re, function(m) {
+         return replacechar(m);
+      })
+   wrap();
+}
+
+function replacechar(match) {
+   if (match == "<")
+      return "&lt;"
+   else if (match == ">")
+      return "&gt;"
+   else if (match == "\"")
+      return "&quot;"
+   else if (match == "'")
+      return "&#039;"
+   else if (match == "&")
+      return "&amp;"
+}
+
+//Function for toggling in FAQ
+(function() {
+   $('dd').filter(':nth-child(n+4)').addClass('hide');
+
+   $('dl').on('click', 'dt', function() {
+      $(this).next().slideToggle(200);
+   });
+})();
+</script>
+
+   <style>
+label,
+input[type="submit"],
+input[type="radio"],
+input[type="checkbox"] input[type="button"] 
+{
+    clear: both;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 1px;
+}
+
+.btn1{
+    clear: both;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 1px;
+    text-align: center;
+}
+
+select
+{
+    clear: both;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 1px;
+    width: 100%;
+    text-align: center;
+}
+
+input:focus,
+textarea:focus{
+  outline: none;
+}
+
+fieldset {
+  border: 0;
+}
+
+h1 {
+    color: #333;
+    font-size: 2.5em;
+    font-weight: 700;
+    text-align:center;
+}
+
+formtag {
+clear: both;
+  border: 0;
+  background: #fff;
+  border-radius: 6px;
+  padding: 0px;
+  min-width: 270px;
+  max-width: 600px;
+  width: 45%;
+  margin: 50px auto;
+  overflow: hidden;
+}
+
+textarea {
+clear: both;
+  resize: vertical;
+  width: 94%;
+  background: #f5f5f5;
+  border: 0;
+  padding: 3%;
+  border-radius: 6px;
+  margin: 0 auto!important;
+  border: 1px solid #eee;
+  font-family: monospace;
+}
+
+.btn1 {
+clear: both;
+  position: relative;
+  min-width: 100px;
+  padding: 10px;
+  margin: 4px;
+  border-radius: 6px;
+  border: 0;
+  background: #333;
+  font-size: 1.2em;
+  color: #fff;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, .1);
+  box-shadow: 0px 3px 0px #333;
+}
+
+.btn1:active {
+  top: 3px;
+  box-shadow: none;
+}
+
+footer {
+clear: both;
+  margin:0 auto;
+  font-size:15px;
+  text-align:center;
+}
+footer span{
+clear: both;
+  color:red;font-size:20px;
+}
+
+.container {
+clear: both;
+  font: 14px/21px "Open Sans", Arial, sans-serif;
+  color: #666;
+  background-color: white;
+  padding: 20px;
+  margin: 40px auto;
+  border-radius: 5px;
+  min-width: 270px;
+  max-width: 600px;
+  width: 45%;
+}
+div.center { text-align: center }
+p {
+  margin-bottom: 10px;
+}
+
+
+.hide {
+  display: none;
+}
+
+dt {
+  font-size: 19px;
+  color: #F26964;
+  margin-bottom: 20px;
+  margin-left: 26px;
+  cursor: pointer;
+}
+
+/* Triangle list item */
+dt:before {
+  content: "";
+  border-color: transparent #ccc;
+  border-style: solid;
+  border-width: 5px 0 5px 8px;
+  display: block;
+  height: 0;
+  width: 0;
+  left: -16px;
+  top: 17px;
+  position: relative;
+}
+
+dd {
+  padding: 20px;
+  background: #FDFCFA;
+  border-radius: 5px;
+  border: 1px solid #F2EEE6;
+  margin: 20px 0 30px;
+  position: relative;
+}
+
+/* Triangle in definition container */
+dd:after, dd:before {
+  bottom: 100%;
+  left: 6%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+dd:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-color: transparent;
+  border-bottom-color: #FDFCFA;
+  border-width: 15px;
+  margin-left: -15px;
+}
+
+dd:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-color: transparent;
+  border-bottom-color: #F2EEE6;
+  border-width: 17px;
+  margin-left: -17px;
+}
+.mungtagtitle{
+font-size:20px;
+text-align:center;
+font-weight: bold;
+padding: 10px 0px 5px 0px;
+border-bottom: 1px dotted #333;
+width: 98%;
+margin-bottom: 7px;
+}
+.mungtagopsi{
+text-align:left;
+padding:0px 0px 5px 0px
+}
+</style>
+<form id="formtag">
+      <div class="mungtagtitle">Blogger Conditional Tag Wrapper</div>
+      <div class="mungtagopsi">Select condition :
+         <select class="center" name="mySelect" id="mySelect">
+                  <option title="Excuted code only in homepage" value="<b:if cond='data:blog.url == data:blog.homepageUrl'>" selected>Only homepage</option>
+<option value="<b:if cond='data:blog.pageType == &quot;index&quot;'>" selected>Index Pages(homepage,label page, archive page)</option>
+                  <option value="<b:if cond='data:blog.pageType == &quot;item&quot;'>">Only post pages</option>
+                  <option value="<b:if cond='data:blog.pageType == &quot;static_page&quot;'>">Only static pages</option>
+                  <option value="<b:if cond='data:blog.url == data:post.url'>">Both post and static pages</option>
+                  <option value="<b:if cond='data:blog.canonicalUrl == &quot;Enter-Your-URL-Here&quot;'/>">Specific pages</option>
+                  <option value="<b:if cond='data:blog.pageType == &quot;archive&quot;'>">Archive or label pages</option>
+                  <option value="<b:if cond='data:blog.pageType == &quot;ERROR_PAGE&quot;'>">Error pages</option>
+                  <option value="<b:if cond='data:mobile'>">Mobile view</option>
+                  <option value="<b:if cond='data:blog.searchLabel'>">All label Pages</option>
+                 <option value="<b:if cond='data:blog.searchLabel == &quot;YOUR_LABEL&quot;'>">Particular label page</option>
+                 <option value="<b:if cond='data:blog.searchQuery'>">Search pages</option>
+                 <option value="<b:if cond='data:blog.searchQuery == &quot;YOUR_SEARCH_QUERY&quot;'>">Particular search query</option>
+                </select>
+      </div>
+      <fieldset>
+         <textarea name="data1" rows="10" id="codeField" onclick="this.focus();this.select();">Enter the code to be wrapped here</textarea>
+         <!--Wrap Button-->
+         <div class="center">
+    <input type="button" class="btn1" id="generatebtn" value="Wrap" onclick="wrap();" title="Wraps the code with selected conditional tag" />
+            <input type="button" class="btn1" id="generatebtn" value="Encode & Wrap" onclick="htmlParser(this.form.data1)" title="Encodes and Wraps the code with selected conditional tag" />
+            <input type="button" class="btn1" value="Reset" onClick="reset();document.getElementById('output_list').innerHTML='';" />
+         </div>
+         <br />
+         <div id="output">
+            <ol id="output_list"></ol>
+         </div>
+      </fieldset>
+   </form></p>

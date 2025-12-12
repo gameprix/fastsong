@@ -1,0 +1,58 @@
+# Free Grammar Checker
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Grammar Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Free Grammar Checker</h1>
+    <textarea id="textInput" placeholder="Type or paste your text here..."></textarea>
+    <button onclick="checkGrammar()">Check Grammar</button>
+    <div id="result"></div>
+
+    <script>
+        function checkGrammar() {
+            const text = document.getElementById('textInput').value;
+            const resultDiv = document.getElementById('result');
+            // Simulated grammar check (replace with actual API call)
+            const errors = text.match(/(\b[a-zA-Z]{1,2}\b)/g);
+            if (errors) {
+                resultDiv.innerHTML = `<p>Found ${errors.length} potential errors.</p>`;
+            } else {
+                resultDiv.innerHTML = '<p>No errors found!</p>';
+            }
+        }
+    </script>
+
+</body>
+</html>

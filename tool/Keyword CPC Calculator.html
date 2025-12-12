@@ -1,0 +1,46 @@
+# Keyword CPC Calculator
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyword CPC Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Keyword CPC Calculator</h1>
+    <label for="url">Enter URL:</label>
+    <input type="text" id="url" placeholder="https://example.com">
+    <button onclick="calculateCPC()">Calculate CPC</button>
+    
+    <h2>Output</h2>
+    <p id="outputText"></p>
+    <button onclick="copyToClipboard()">Copy to Clipboard</button>
+
+    <script>
+        function calculateCPC() {
+            const url = document.getElementById('url').value;
+            // Simulated CPC calculation logic
+            const cpc = Math.random() * 10; // Random CPC value for demonstration
+            document.getElementById('outputText').innerText = `Estimated CPC for ${url} is $${cpc.toFixed(2)}`;
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('outputText').innerText;
+            navigator.clipboard.writeText(outputText).then(() => {
+                alert('Copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>

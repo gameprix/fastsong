@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backlink Checker Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #urlInput {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        #checkButton {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #results {
+            margin-top: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Backlink Checker Tool</h1>
+    <input type="text" id="urlInput" placeholder="Enter URL to check backlinks">
+    <button id="checkButton">Check Backlinks</button>
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('checkButton').addEventListener('click', function() {
+            const url = document.getElementById('urlInput').value;
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = 'Checking backlinks for: ' + url;
+
+            // Simulate an API call to check backlinks
+            setTimeout(() => {
+                resultsDiv.innerHTML = 'Backlinks found for ' + url + ': <br> - example1.com <br> - example2.com <br> - example3.com';
+            }, 2000);
+        });
+    </script>
+
+</body>
+</html>

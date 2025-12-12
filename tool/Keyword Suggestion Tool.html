@@ -1,0 +1,45 @@
+# Keyword Suggestion Tool
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyword Suggestion Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #suggestions {
+            margin-top: 20px;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Keyword Suggestion Tool</h1>
+    <input type="text" id="urlInput" placeholder="Enter URL" />
+    <button id="generateButton">Generate Suggestions</button>
+    <div id="suggestions"></div>
+
+    <script>
+        document.getElementById('generateButton').addEventListener('click', function() {
+            const url = document.getElementById('urlInput').value;
+            // Simulated keyword suggestions based on the input URL
+            const suggestions = ['Keyword1', 'Keyword2', 'Keyword3']; // Replace with actual logic
+
+            const suggestionsDiv = document.getElementById('suggestions');
+            suggestionsDiv.innerHTML = '<h2>Suggestions:</h2>' + suggestions.map(s => `<p>${s} <button onclick="copyToClipboard('${s}')">Copy</button></p>`).join('');
+        });
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard: ' + text);
+            });
+        }
+    </script>
+</body>
+</html>

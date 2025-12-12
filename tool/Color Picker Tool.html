@@ -1,0 +1,39 @@
+# HTML Script for Color Picker Tool
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        #colorDisplay {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Color Picker Tool</h1>
+    <input type="color" id="colorInput" value="#ff0000">
+    <div id="colorDisplay"></div>
+
+    <script>
+        const colorInput = document.getElementById('colorInput');
+        const colorDisplay = document.getElementById('colorDisplay');
+
+        colorInput.addEventListener('input', function() {
+            colorDisplay.style.backgroundColor = colorInput.value;
+        });
+    </script>
+
+</body>
+</html>

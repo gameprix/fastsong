@@ -1,0 +1,63 @@
+# Contact Us Generator
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 5px 0;
+            padding: 10px;
+            width: 100%;
+        }
+        #output {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Contact Us Generator</h1>
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="text" id="url" placeholder="Your Website URL" required>
+    <input type="email" id="gmail" placeholder="Your Gmail" required>
+    <input type="text" id="no_hp" placeholder="Your Phone Number" required>
+    <button onclick="generateContact()">Generate Contact</button>
+
+    <div id="output">
+        <h2>Generated Contact Information</h2>
+        <pre id="contactInfo"></pre>
+        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+    </div>
+
+    <script>
+        function generateContact() {
+            const name = document.getElementById('name').value;
+            const url = document.getElementById('url').value;
+            const gmail = document.getElementById('gmail').value;
+            const no_hp = document.getElementById('no_hp').value;
+
+            const contactInfo = `Name: ${name}\nWebsite: ${url}\nEmail: ${gmail}\nPhone: ${no_hp}`;
+            document.getElementById('contactInfo').textContent = contactInfo;
+            document.getElementById('output').style.display = 'block';
+        }
+
+        function copyToClipboard() {
+            const contactInfo = document.getElementById('contactInfo').textContent;
+            navigator.clipboard.writeText(contactInfo).then(() => {
+                alert('Contact information copied to clipboard!');
+            });
+        }
+    </script>
+
+</body>
+</html>

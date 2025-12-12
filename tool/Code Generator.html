@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+        }
+        #output {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>HTML Code Generator</h1>
+    
+    <h2>Input HTML</h2>
+    <textarea id="inputHtml" placeholder="Enter your HTML code here..."></textarea>
+    
+    <h2>Input CSS</h2>
+    <textarea id="inputCss" placeholder="Enter your CSS code here..."></textarea>
+    
+    <h2>Input JavaScript</h2>
+    <textarea id="inputJs" placeholder="Enter your JavaScript code here..."></textarea>
+    
+    <button onclick="generateCode()">Generate Code</button>
+    <button onclick="copyCode()">Copy All Code</button>
+    <button onclick="downloadCode()">Download Code</button>
+    
+    <h2>Output Preview</h2>
+    <div id="output"></div>
+
+    <script>
+        function generateCode() {
+            const html = document.getElementById('inputHtml').value;
+            const css = document.getElementById('inputCss').value;
+            const js = document.getElementById('inputJs').value;
+            const output = `
+                <style>${css}</style>
+                <div>${html}</div>
+                <script>${js}<\/script>
+            `;
+            document.getElementById('output').textContent = output;
+        }
+
+        function copyCode() {
+            const output = document.getElementById('output').textContent;
+            navigator.clipboard.writeText(output).then(() => {
+                alert('Code copied to clipboard!');
+            });
+        }
+
+        function downloadCode() {
+            const output = document.getElementById('output').textContent;
+            const blob = new Blob([output], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'generated_code.html';
+            link.click();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duplicate Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Duplicate Checker Tool</h1>
+    <input type="text" id="inputText" placeholder="Enter text here...">
+    <button onclick="checkDuplicates()">Check for Duplicates</button>
+    <div id="result"></div>
+
+    <script>
+        function checkDuplicates() {
+            const inputText = document.getElementById('inputText').value;
+            const words = inputText.split(/\s+/);
+            const duplicates = words.filter((item, index) => words.indexOf(item) !== index);
+            const uniqueDuplicates = [...new Set(duplicates)];
+            const resultDiv = document.getElementById('result');
+            if (uniqueDuplicates.length > 0) {
+                resultDiv.innerHTML = 'Duplicate words: ' + uniqueDuplicates.join(', ');
+            } else {
+                resultDiv.innerHTML = 'No duplicates found.';
+            }
+        }
+    </script>
+
+</body>
+</html>

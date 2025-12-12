@@ -1,0 +1,64 @@
+# Free SEO On-Page Audit Tool
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free SEO On-Page Audit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        #output {
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Free SEO On-Page Audit</h1>
+<input type="text" id="urlInput" placeholder="Enter URL to audit" />
+<button id="auditButton">Audit</button>
+
+<div id="output"></div>
+<button id="copyButton">Copy Output</button>
+
+<script>
+    document.getElementById('auditButton').addEventListener('click', function() {
+        const url = document.getElementById('urlInput').value;
+        // Simulated audit output
+        const output = `SEO Audit Results for: ${url}\n- Title: Example Title\n- Meta Description: Example Description\n- H1 Tags: Example H1\n- Alt Tags: Example Alt Tags`;
+        document.getElementById('output').innerText = output;
+    });
+
+    document.getElementById('copyButton').addEventListener('click', function() {
+        const outputText = document.getElementById('output').innerText;
+        navigator.clipboard.writeText(outputText).then(() => {
+            alert('Output copied to clipboard!');
+        });
+    });
+</script>
+
+</body>
+</html>

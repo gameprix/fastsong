@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Generator Share</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Code Generator Share</h1>
+    <h2>HTML Input</h2>
+    <textarea id="htmlInput" placeholder="Enter your HTML code here..."></textarea>
+    
+    <h2>CSS Input</h2>
+    <textarea id="cssInput" placeholder="Enter your CSS code here..."></textarea>
+    
+    <h2>JavaScript Input</h2>
+    <textarea id="jsInput" placeholder="Enter your JavaScript code here..."></textarea>
+    
+    <h2>Console Output</h2>
+    <textarea id="consoleOutput" placeholder="Console output will appear here..." readonly></textarea>
+    
+    <h2>Preview</h2>
+    <div id="preview" style="border: 1px solid #ccc; padding: 10px;"></div>
+    
+    <button onclick="generateCode()">Generate Code</button>
+    <button onclick="copyCode()">Copy All Code</button>
+    <button onclick="downloadCode()">Download Code</button>
+    <button onclick="shareCode()">Share Code</button>
+
+    <script>
+        function generateCode() {
+            const html = document.getElementById('htmlInput').value;
+            const css = document.getElementById('cssInput').value;
+            const js = document.getElementById('jsInput').value;
+
+            const preview = document.getElementById('preview');
+            preview.innerHTML = html;
+
+            const style = document.createElement('style');
+            style.innerHTML = css;
+            document.head.appendChild(style);
+
+            const script = document.createElement('script');
+            script.innerHTML = js;
+            document.body.appendChild(script);
+
+            document.getElementById('consoleOutput').value = "Code generated successfully!";
+        }
+
+        function copyCode() {
+            const html = document.getElementById('htmlInput').value;
+            const css = document.getElementById('cssInput').value;
+            const js = document.getElementById('jsInput').value;
+            const allCode = `HTML:\n${html}\n\nCSS:\n${css}\n\nJavaScript:\n${js}`;
+            navigator.clipboard.writeText(allCode);
+            alert("All code copied to clipboard!");
+        }
+
+        function downloadCode() {
+            const html = document.getElementById('htmlInput').value;
+            const css = document.getElementById('cssInput').value;
+            const js = document.getElementById('jsInput').value;
+            const blob = new Blob([`HTML:\n${html}\n\nCSS:\n${css}\n\nJavaScript:\n${js}`], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'code.txt';
+            link.click();
+        }
+
+        function shareCode() {
+            const html = document.getElementById('htmlInput').value;
+            const css = document.getElementById('cssInput').value;
+            const js = document.getElementById('jsInput').value;
+            const allCode = `HTML:\n${html}\n\nCSS:\n${css}\n\nJavaScript:\n${js}`;
+            const encodedCode = encodeURIComponent(allCode);
+            const shareUrl = `https://example.com/share?code=${encodedCode}`;
+            window.open(shareUrl, '_blank');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paraphraser Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .option {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Paraphraser Tool</h1>
+    <textarea id="inputText" rows="10" cols="50" placeholder="Enter your text here..."></textarea>
+    <div class="option">
+        <label for="format">Choose a format:</label>
+        <select id="format">
+            <option value="simple">Simple</option>
+            <option value="formal">Formal</option>
+            <option value="creative">Creative</option>
+            <option value="concise">Concise</option>
+        </select>
+    </div>
+    <button id="paraphraseButton">Paraphrase</button>
+    <h2>Output:</h2>
+    <div id="outputText" style="border: 1px solid #ccc; padding: 10px;"></div>
+
+    <script>
+        document.getElementById('paraphraseButton').addEventListener('click', function() {
+            const inputText = document.getElementById('inputText').value;
+            const format = document.getElementById('format').value;
+            let outputText = '';
+
+            // Simulated paraphrasing logic
+            if (format === 'simple') {
+                outputText = inputText.replace(/(\w+)/g, 'simple_$1');
+            } else if (format === 'formal') {
+                outputText = inputText.replace(/(\w+)/g, 'formal_$1');
+            } else if (format === 'creative') {
+                outputText = inputText.replace(/(\w+)/g, 'creative_$1');
+            } else if (format === 'concise') {
+                outputText = inputText.split(' ').slice(0, 5).join(' ') + '...';
+            }
+
+            document.getElementById('outputText').innerText = outputText;
+        });
+    </script>
+
+</body>
+</html>

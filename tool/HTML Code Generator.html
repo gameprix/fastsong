@@ -1,0 +1,86 @@
+# HTML Code Generator
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Code Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>HTML Code Generator</h1>
+    
+    <label for="htmlInput">Input HTML:</label>
+    <textarea id="htmlInput"></textarea>
+    
+    <label for="cssInput">Input CSS:</label>
+    <textarea id="cssInput"></textarea>
+    
+    <label for="jsInput">Input JavaScript:</label>
+    <textarea id="jsInput"></textarea>
+    
+    <button onclick="generateCode()">Generate Code</button>
+    
+    <h2>Output:</h2>
+    <textarea id="output" readonly></textarea>
+    
+    <button onclick="copyToClipboard()">Copy to Clipboard</button>
+
+    <script>
+        function generateCode() {
+            const html = document.getElementById('htmlInput').value;
+            const css = document.getElementById('cssInput').value;
+            const js = document.getElementById('jsInput').value;
+            const output = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        ${css}
+    </style>
+    <title>Generated Code</title>
+</head>
+<body>
+    ${html}
+    <script>
+        ${js}
+    </script>
+</body>
+</html>`;
+            document.getElementById('output').value = output;
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            alert('Code copied to clipboard!');
+        }
+    </script>
+
+</body>
+</html>
