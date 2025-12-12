@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fastsong.eu.org - Legal Pages</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #0e0e0e;
+            color: #e6e6e6;
+        }
+
+        header {
+            background: #000;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #fff;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #111;
+            border-bottom: 1px solid #222;
+        }
+
+        nav a {
+            color: #ccc;
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover, nav a.active {
+            background: #222;
+            color: #fff;
+        }
+
+        .content {
+            display: none;
+            padding: 30px;
+            max-width: 900px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        h2 {
+            color: #fff;
+            margin-top: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+            border-top: 1px solid #222;
+            color: #aaa;
+            margin-top: 40px;
+        }
+
+        a {
+            color: #4ea4ff;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>fastsong.eu.org</h1>
+</header>
+
+<nav>
+    <a onclick="showPage('contact')" id="btn-contact" class="active">Contact</a>
+    <a onclick="showPage('privacy')" id="btn-privacy">Privacy Policy</a>
+    <a onclick="showPage('terms')" id="btn-terms">Terms & Conditions</a>
+    <a onclick="showPage('disclaimer')" id="btn-disclaimer">Disclaimer</a>
+</nav>
+
+<!-- CONTACT -->
+<div class="content active" id="contact">
+    <h2>Contact</h2>
+    <p>Jika Anda memiliki pertanyaan atau ingin menghubungi kami, silakan kirim pesan ke:</p>
+    <p><b>Email:</b> admin@fastsong.eu.org</p>
+    <p>Atau melalui formulir kontak jika tersedia.</p>
+</div>
+
+<!-- PRIVACY POLICY -->
+<div class="content" id="privacy">
+    <h2>Privacy Policy</h2>
+    <p>Privasi pengunjung sangat penting bagi kami. Dokumen ini menjelaskan bagaimana kami mengumpulkan dan menggunakan data.</p>
+
+    <h3>1. Informasi yang Dikumpulkan</h3>
+    <ul>
+        <li>IP Address, jenis browser, dan waktu kunjungan</li>
+        <li>Cookies untuk meningkatkan pengalaman pengguna</li>
+        <li>Data dari formulir kontak</li>
+    </ul>
+
+    <h3>2. Penggunaan Informasi</h3>
+    <p>Informasi digunakan untuk analisis, peningkatan situs, dan menanggapi pesan pengguna.</p>
+
+    <h3>3. Cookies</h3>
+    <p>Kami menggunakan cookies untuk personalisasi dan analitik.</p>
+
+    <h3>4. Tautan ke Pihak Ketiga</h3>
+    <p>Kami tidak bertanggung jawab atas konten situs eksternal.</p>
+
+    <h3>5. Persetujuan</h3>
+    <p>Dengan menggunakan situs ini, Anda menyetujui kebijakan privasi ini.</p>
+</div>
+
+<!-- TERMS -->
+<div class="content" id="terms">
+    <h2>Terms & Conditions</h2>
+    <p>Dengan mengakses fastsong.eu.org, Anda menyetujui syarat berikut:</p>
+
+    <h3>1. Penggunaan Layanan</h3>
+    <p>Konten disediakan apa adanya untuk keperluan informasi.</p>
+
+    <h3>2. Hak Cipta</h3>
+    <p>Konten tidak boleh disalin tanpa izin.</p>
+
+    <h3>3. Batasan Tanggung Jawab</h3>
+    <p>Kami tidak bertanggung jawab atas kerusakan akibat penggunaan situs.</p>
+
+    <h3>4. Pembaruan</h3>
+    <p>Syarat dapat berubah sewaktu-waktu tanpa pemberitahuan.</p>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="content" id="disclaimer">
+    <h2>Disclaimer</h2>
+    <p>Informasi di situs ini disediakan tanpa jaminan apa pun. Semua risiko penggunaan berada pada pengguna.</p>
+    <p>Kami tidak bertanggung jawab atas kerugian akibat penggunaan konten atau tautan pihak ketiga.</p>
+</div>
+
+<footer>
+    &copy; 2025 fastsong.eu.org — All Rights Reserved
+</footer>
+
+<script>
+    function showPage(id) {
+        document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+
+        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+        document.getElementById('btn-' + id).classList.add('active');
+    }
+</script>
+
+</body>
+</html>
