@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Drum Kit Advanced</title>
+    <link rel="stylesheet" href="style.css">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://fastsong.eu.org/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fastsong.eu.org/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://fastsong.eu.org/apple-touch-icon.png">
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="ui.css">
+<link rel="manifest" href="manifest.json">
+
+<!-- GOOGLE ADSENSE -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4633437485737999"
+crossorigin="anonymous"></script>
+<meta name="google-adsense-account" content="ca-pub-4633437485737999">
+
+<script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+</script>
+
+</head>
+<body>
+
+<h1>Virtual Drum Kit – Advanced</h1>
+
+<div class="controls">
+    <button id="recordBtn">🔴 Record</button>
+    <button id="playBtn">▶️ Play</button>
+    <label>
+        Volume:
+        <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1">
+    </label>
+</div>
+
+<div class="drum-container">
+    <button class="drum" data-sound="kick" data-key="A">Kick (A)</button>
+    <button class="drum" data-sound="snare" data-key="S">Snare (S)</button>
+    <button class="drum" data-sound="hihat" data-key="D">Hi-Hat (D)</button>
+    <button class="drum" data-sound="tom1" data-key="J">Tom 1 (J)</button>
+    <button class="drum" data-sound="tom2" data-key="K">Tom 2 (K)</button>
+    <button class="drum" data-sound="crash" data-key="L">Crash (L)</button>
+</div>
+
+<script src="audio-effects.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
