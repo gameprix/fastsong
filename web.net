@@ -1,0 +1,23 @@
+# FastSong Web Application
+
+Imports System.Net
+Imports System.IO
+
+Module FastSong
+    Sub Main()
+        Dim url As String = "http://fastsong.e.org"
+        Dim request As HttpWebRequest = CType(WebRequest.Create(url), HttpWebRequest)
+        request.Method = "GET"
+
+        Try
+            Using response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
+                Using reader As New StreamReader(response.GetResponseStream())
+                    Dim result As String = reader.ReadToEnd()
+                    Console.WriteLine(result)
+                End Using
+            End Using
+        Catch ex As Exception
+            Console.WriteLine("Error: " & ex.Message)
+        End Try
+    End Sub
+End Module
