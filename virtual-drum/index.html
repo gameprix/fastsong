@@ -5,7 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Drum Kit Advanced</title>
     <link rel="stylesheet" href="style.css">
+<style type="text/css">
+#visualizer {
+    display: block;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 900px;
+    height: 250px;
+    background: #111;
+    border: 1px solid #555;
+    border-radius: 10px;
+}
 
+</style>
 <!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="https://fastsong.eu.org/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://fastsong.eu.org/favicon-16x16.png">
@@ -38,7 +50,6 @@ crossorigin="anonymous"></script>
         <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1">
     </label>
 </div>
-
 <div class="drum-container">
     <button class="drum" data-sound="kick" data-key="A">Kick (A)</button>
     <button class="drum" data-sound="snare" data-key="S">Snare (S)</button>
@@ -48,8 +59,110 @@ crossorigin="anonymous"></script>
     <button class="drum" data-sound="crash" data-key="L">Crash (L)</button>
 </div>
 
+<!-- Canvas untuk Visualizer -->
+<canvas id="visualizer" width="800" height="200"></canvas>
+
 <script src="audio-effects.js"></script>
 <script src="app.js"></script>
+<script src="visualizer.js"></script>
 
+<div class="drum-container">
+    <button class="drum" data-sound="kick" data-key="A">Kick (A)</button>
+    <button class="drum" data-sound="snare" data-key="S">Snare (S)</button>
+    <button class="drum" data-sound="hihat" data-key="D">Hi-Hat (D)</button>
+    <button class="drum" data-sound="tom1" data-key="J">Tom 1 (J)</button>
+    <button class="drum" data-sound="tom2" data-key="K">Tom 2 (K)</button>
+    <button class="drum" data-sound="crash" data-key="L">Crash (L)</button>
+    <button class="drum" data-sound="90_Back_Loop_BBD_FatLoops_01" data-key="M">BBD 1 (M)</button>
+    <button class="drum" data-sound="90_Back_Loop_BBD_FatLoops_02" data-key="M">BBD 2 (M)</button>
+    <button class="drum" data-sound="BD_BBD_FatLoops_01" data-key="B">BB 1 (B)</button>
+    <button class="drum" data-sound="BD_BBD_FatLoops_03" data-key="B">Bb 2 (B)</button>
+    <button class="drum" data-sound="CC_BBD_FatLoops_01" data-key="C">CC 1 (C)</button>
+    <button class="drum" data-sound="CP_BBD_FatLoops_01" data-key="C">CC 2 (C)</button>
+    <button class="drum" data-sound="CY_BBD_FatLoops_01" data-key="A">Kick (A)</button>
+    <button class="drum" data-sound="FX_BBD_FatLoops_01" data-key="F">FX 1 (F)</button>
+    <button class="drum" data-sound="FX_BBD_FatLoops_02" data-key="F">FX 2 (F)</button>
+    <button class="drum" data-sound="HH_BBD_FatLoops_01" data-key="H">HH 1 (H)</button>
+    <button class="drum" data-sound="PC_BBD_FatLoops_01" data-key="P">PC (P)</button>
+    <button class="drum" data-sound="SD_BBD_FatLoops_01" data-key="S">SD (S)</button>
+    
+
+</div>
+
+<script src="audio-effects.js"></script>
+<script src="app.js"></script>
+<script type="text/javascript">
+const canvas = document.getElementById("visualizer");
+const ctx = canvas.getContext("2d");
+
+// Analyser global
+const analyser = audioCtx.createAnalyser();
+analyser.fftSize = 512;
+const bufferLength = analyser.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+
+// Mapping drum ke warna
+const drumColors = {
+    kick: "#ff3b3b",
+    snare: "#3bafff",
+    hihat: "#fffa3b",
+    tom1: "#ff8c3b",
+    tom2: "#8cff3b",
+    crash: "#ff3bfa"
+};
+
+// Track untuk setiap drum
+const drumTracks = {
+    kick: new Uint8Array(bufferLength),
+    snare: new Uint8Array(bufferLength),
+    hihat: new Uint8Array(bufferLength),
+    tom1: new Uint8Array(bufferLength),
+    tom2: new Uint8Array(bufferLength),
+    crash: new Uint8Array(bufferLength)
+};
+
+// Override playSound supaya input ke track spesifik
+function playSoundWithTrack(name) {
+    const source = audioCtx.createBufferSource();
+    source.buffer = drumBuffers[name];
+    const trackGain = audioCtx.createGain();
+    source.connect(trackGain).connect(analyser);
+    source.start(0);
+}
+
+// Animate visualizer
+function drawVisualizer() {
+    requestAnimationFrame(drawVisualizer);
+
+    analyser.getByteFrequencyData(dataArray);
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#111";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const barWidth = (canvas.width / bufferLength) * 2.5;
+    let x = 0;
+
+    // Multi-track: setiap drum memiliki bar dengan warna berbeda
+    Object.keys(drumTracks).forEach(drum => {
+        // Simulasi track: gunakan sebagian dataArray
+        for (let i = 0; i < bufferLength; i++) {
+            const value = dataArray[i] * Math.random(); // variasi untuk visual track
+            ctx.fillStyle = drumColors[drum];
+            ctx.globalAlpha = 0.3; // transparansi agar overlay warna terlihat
+            ctx.fillRect(x, canvas.height - value / 2, barWidth, value / 2);
+            x += barWidth;
+        }
+        x = 0; // reset x untuk drum selanjutnya
+    });
+
+    ctx.globalAlpha = 1; // reset alpha
+}
+
+// Start visualizer
+drawVisualizer();
+
+</script>
 </body>
 </html>
