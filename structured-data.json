@@ -1,0 +1,24 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "FASTSONG",
+  "url": "https://fastsong.eu.org/",
+  "description": "FASTSONG adalah editor musik online gratis untuk memotong, mengedit, dan meningkatkan kualitas audio langsung dari browser tanpa instalasi.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "FASTSONG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://fastsong.eu.org/logo.png",
+      "width": 250,
+      "height": 60
+    }
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://fastsong.eu.org/?s={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
